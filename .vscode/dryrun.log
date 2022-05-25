@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/cassiano/Downloads/sdl2-starter-main'
+gcc -std=c++11 -Wall -O0 -g -lsdl2 -lSDL2_image   src/main.cpp -o build/debug/main
+make: Leaving directory `/Users/cassiano/Downloads/sdl2-starter-main'
+ 
