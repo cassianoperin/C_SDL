@@ -5,6 +5,9 @@
         "random": "cpp",
         "*.tcc": "cpp",
         "string": "cpp",
-        "display.h": "c"
+        "display.h": "c",
+        "type_traits": "c",
+        "__config": "cpp",
+        "stdbool.h": "c"
     }
 }

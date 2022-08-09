@@ -5,7 +5,7 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_NAME = main
 # INCLUDE_PATHS = -Iinclude
 # LIBRARY_PATHS = -Llib
-COMPILER_FLAGS = -std=c++11 -Wall -O0 -g
+COMPILER_FLAGS = -std=c++11 -pedantic -Wall -O0 -g
 LINKER_FLAGS = -lsdl2 -lSDL2_image
 
 all:

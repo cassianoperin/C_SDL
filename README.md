@@ -23,8 +23,7 @@ Link the SDL_Image.h inside SDL2:
 
 # To-do
 
-1. Migrate main functions to another files
-2. Test main loop speed
-3. Add FPS
-4. Counter 60 FPS / delay timers
-5. Just draw when @60FPS
+1. Test main loop speed
+2. Add FPS
+3. Counter 60 FPS / delay timers
+4. Just draw when @60FPS
