@@ -45,7 +45,7 @@ bool display_init(struct display* display)
 	return success;
 }
 
-bool display_draw(struct display* display)
+bool display_draw(struct display* display, unsigned int frame)
 {
 	//Initialization flag
 	bool success = true;
@@ -54,15 +54,15 @@ bool display_draw(struct display* display)
 	memset(pixels, PIXEL_OFF_COLOR, sizeof(pixels));
 
 	// Test turn on some pixels
-	pixels[5] = PIXEL_ON_COLOR;
-	pixels[2047] = PIXEL_ON_COLOR;
+	pixels[frame] = PIXEL_ON_COLOR;
+	pixels[2048-frame] = PIXEL_ON_COLOR;
 
 	// Update the Screen
 	SDL_UpdateTexture(display->texture, NULL, pixels, SCREEN_WIDTH * sizeof(uint32_t));
 	SDL_RenderCopy(display->renderer, display->texture, NULL, NULL);
 	SDL_RenderPresent(display->renderer);
 
-	SDL_SetWindowTitle(display->window, "test");
+	// SDL_SetWindowTitle(display->window, "CPS:0      FPS:0");
 	
 	return success;
 }

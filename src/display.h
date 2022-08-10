@@ -7,5 +7,5 @@ struct display {
 };
 
 bool display_init(struct display* display);
-bool display_draw(struct display* display);
+bool display_draw(struct display* display, unsigned int frame);
 void display_close(struct display* display);

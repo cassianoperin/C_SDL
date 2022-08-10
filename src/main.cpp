@@ -1,20 +1,33 @@
 #include <SDL2/SDL.h>
 #include <string>
+#include "lib.h"
 #include "display.h"
+
+// Global Variables
+unsigned int cycle = 0;
+unsigned int frame = 0;
+unsigned int lastTime_second = 0;
+unsigned int lastTime_fps = 0;
+unsigned int currentTime = 0;
+
 
 // -------------------------------- main -------------------------------- //
 
 int main( int argc, char* args[] )
 {
-
 	// Variables
 	struct display display;
-	int counter = 0;
+	char* filename = (char*)"/Users/cassiano/go/src/C_SDL/src/rush.ch8";
+	// char* filename = args[1];
+	unsigned char memory[4096] = {0};
 
+	// Load ROM into memory
+	load_rom(filename, memory, sizeof(memory));
+	
 	//Start up SDL and create window
 	if( !display_init(&display) )
 	{
-		printf( "Failed to initialize!\n" );
+		printf( "Failed to initialize SDL!\n" );
 	}
 	else
 	{
@@ -22,24 +35,67 @@ int main( int argc, char* args[] )
 		bool quit = false;
 
 		//Event handler
-		SDL_Event e;
+		SDL_Event event;
 
 		// ----------------------- Infinite Loop  ----------------------- //
 		while( !quit )
 		{
-			//Handle events on queue
-			while( SDL_PollEvent( &e ) != 0 )
-			{
-				//User requests quit
-				if( e.type == SDL_QUIT )
-				{
-					quit = true;
-				}
+			// Current time
+			currentTime = SDL_GetTicks();
+
+
+			// Ticker Second
+			if ( ticker_second(lastTime_second, currentTime) ) {
+
+				// Cycles and FPS Measurement
+				// printf("CPS: %d\tFPS: %d\n", cycle, frame+1);
+				char title_msg[30];
+				sprintf(title_msg, "CPS: %d\t\tFPS: %d", cycle, frame+1);
+				SDL_SetWindowTitle(display.window, title_msg);
+
+				// Update timer variables
+				lastTime_second = currentTime;
+
+				// Reset counters
+				cycle = 0;
+				frame = 0;
 			}
 
+			// Ticker FPS (60 times per second)
+			if ( ticker_fps(lastTime_fps, currentTime) ) {
 
-			// Draw
-			display_draw(&display); 
+				// Handle events on queue
+				while( SDL_PollEvent( &event ) != 0 )
+				{
+					if (event.type == SDL_KEYDOWN)
+					{
+						const char* key = SDL_GetKeyName(event.key.keysym.sym);
+						if (strcmp(key,"Q") == 0 || strcmp(key,"Escape") == 0)
+						{
+							quit = true;
+						}
+					}
+					else if (event.type == SDL_QUIT)
+					{
+						quit = true;
+					}
+				}
+
+				// Draw screen
+				display_draw(&display, frame);
+
+				// Update timer variables
+				lastTime_fps = currentTime;
+
+				// Increment frame counter
+				frame ++;
+			}
+
+			// Increment CPU Cycle
+			cycle++;
+
+			// Kill on first cycle for tests
+			// break;
 		}
 	}
 
