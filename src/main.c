@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-#include <string>
 #include "lib.h"
 #include "display.h"
 
