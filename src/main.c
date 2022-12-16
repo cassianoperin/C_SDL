@@ -42,7 +42,7 @@ int main( int argc, char* args[] )
 
 				// Cycles and FPS Measurement
 				// printf("CPS: %d\tFPS: %d\n", cycle, frame+1);
-				char title_msg[30];
+				char title_msg[50];
 				sprintf(title_msg, "Cycles per second: %d\t\tFPS: %d", cycle, frame+1);
 				SDL_SetWindowTitle(display.window, title_msg);
 
