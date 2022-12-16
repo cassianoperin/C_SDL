@@ -16,13 +16,7 @@ int main( int argc, char* args[] )
 {
 	// Variables
 	struct display display;
-	char* filename = (char*)"/Users/cassiano/go/src/C_SDL/src/rush.ch8";
-	// char* filename = args[1];
-	unsigned char memory[4096] = {0};
 
-	// Load ROM into memory
-	load_rom(filename, memory, sizeof(memory));
-	
 	//Start up SDL and create window
 	if( !display_init(&display) )
 	{
@@ -49,7 +43,7 @@ int main( int argc, char* args[] )
 				// Cycles and FPS Measurement
 				// printf("CPS: %d\tFPS: %d\n", cycle, frame+1);
 				char title_msg[30];
-				sprintf(title_msg, "CPS: %d\t\tFPS: %d", cycle, frame+1);
+				sprintf(title_msg, "Cycles per second: %d\t\tFPS: %d", cycle, frame+1);
 				SDL_SetWindowTitle(display.window, title_msg);
 
 				// Update timer variables
