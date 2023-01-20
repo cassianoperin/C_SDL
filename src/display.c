@@ -1,7 +1,16 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "display.h"
-#include "constant.h"
+
+void display_init()
+{
+	// Screen Variables
+	display_SCREEN_WIDTH_X	= 64;
+	display_SCREEN_HEIGHT_Y	= 32;
+	display_SCALE			= 20;
+	display_pixel_ON_color	= 0xFFFFFFFF;
+	display_pixel_OFF_color	= 0xFF000000;
+};
 
 bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, unsigned int frame, Scene *scene)
 {
@@ -9,18 +18,20 @@ bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* textu
 	bool success = true;
 
 	// Initialization - Clean pixels array
-	memset(pixels, PIXEL_OFF_COLOR, sizeof(pixels));
+	for ( int i = 0 ; i < (int)( sizeof(pixels) / sizeof(pixels[0])) ; i++ ) {
+			pixels[i] = display_pixel_OFF_color;
+	}
 
 	// Test turn on some pixels
-	pixels[frame] = PIXEL_ON_COLOR;
-	pixels[2048-frame] = PIXEL_ON_COLOR;
+	pixels[frame] = display_pixel_ON_color;
+	pixels[2048-frame] = display_pixel_ON_color;
 
     /* Clear the background to background color */
     // SDL_SetRenderDrawColor(renderer, 0x33, 0x00, 0x40, 0xFF);
     SDL_RenderClear(renderer);
 
     // Update game texture
-	SDL_UpdateTexture(texture, NULL, pixels, SCREEN_WIDTH * sizeof(uint32_t));
+	SDL_UpdateTexture(texture, NULL, pixels, display_SCREEN_WIDTH_X * sizeof(uint32_t));
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 
     // Update Text Messages

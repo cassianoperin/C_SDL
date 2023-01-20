@@ -16,7 +16,7 @@ typedef enum
 } TextRenderMethod;
 
 // SDL TTF
-TTF_Font *font;
+// TTF_Font *font;
 // SDL_Surface *text = NULL;
 // Scene scene;
 int ptsize;

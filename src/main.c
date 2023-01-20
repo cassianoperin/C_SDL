@@ -3,7 +3,6 @@
 #include "lib.h"
 #include "display.h"
 #include "font.h"
-#include "constant.h"
 
 // Global Variables
 unsigned int cycle = 0;
@@ -11,6 +10,8 @@ unsigned int frame = 0;
 unsigned int lastTime_second = 0;
 unsigned int lastTime_fps = 0;
 unsigned int currentTime = 0;
+
+
 
 
 int main( int argc, char* args[] )
@@ -34,17 +35,19 @@ int main( int argc, char* args[] )
     Scene scene;
 
 	// Colors
-	SDL_Color white = { 0xFF, 0xFF, 0xFF, 1 };
+	// SDL_Color white = { 0xFF, 0xFF, 0xFF, 1 };
 	// SDL_Color black = { 0x00, 0x00, 0x00, 0 };
-	SDL_Color red   = { 0xFF, 0x00, 0x00, 0 };
-	SDL_Color *forecol;
-	SDL_Color *backcol;
+	// SDL_Color red   = { 0xFF, 0x00, 0x00, 0 };
+	// SDL_Color forecol;
+	SDL_Color forecol = { 0x87, 0xCE, 0xFA, 0 }; // red
+	SDL_Color backcol = { 0xFF, 0xFF, 0xFF, 1 }; // white
+	// SDL_Color backcol = { 0x00, 0x00, 0x00, 0 }; // black
 
     // ------------ Font Background Color ------------ //
-    forecol = &red;
+    // forecol = &red;
 
     // ------------ Font Foreground Color ------------ //
-    backcol = &white;
+    // backcol = &white;
 
 
 	// ---------------------- FONT INIT ----------------------- //
@@ -65,6 +68,11 @@ int main( int argc, char* args[] )
 
 
 	// ----------------------- SDL INIT ----------------------- //
+
+	// Initialize Display Variables
+	display_init();
+
+	// SDL INIT
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
@@ -74,7 +82,7 @@ int main( int argc, char* args[] )
 	else
 	{
 		//Create window
-		window = SDL_CreateWindow( "C_SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * SCALE, SCREEN_HEIGHT * SCALE, SDL_WINDOW_SHOWN );
+		window = SDL_CreateWindow( "C_SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, display_SCREEN_WIDTH_X * display_SCALE, display_SCREEN_HEIGHT_Y * display_SCALE, SDL_WINDOW_SHOWN );
 		
 		if( window == NULL )
 		{
@@ -93,7 +101,7 @@ int main( int argc, char* args[] )
 				exit(2);
 			} else {
 				//Create texture
-				texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
+				texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, display_SCREEN_WIDTH_X, display_SCREEN_HEIGHT_Y);
 				if( renderer == NULL )
 				{
 					printf( "Texture could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -110,19 +118,19 @@ int main( int argc, char* args[] )
 
    switch (rendermethod) {
     case TextRenderSolid:
-        text = TTF_RenderText_Solid(font, string, *forecol);                // LATIN1
-        // text = TTF_RenderUTF8_Solid(font, message, *forecol);            // UTF8
-        // text = TTF_RenderUNICODE_Solid(font, unicode_text, *forecol);    // Unicode
+        text = TTF_RenderText_Solid(font, string, forecol);                // LATIN1
+        // text = TTF_RenderUTF8_Solid(font, message, forecol);            // UTF8
+        // text = TTF_RenderUNICODE_Solid(font, unicode_text, forecol);    // Unicode
         break;
     case TextRenderShaded:
-        text = TTF_RenderText_Shaded(font, string, *forecol, *backcol);      // LATIN1
-        // text = TTF_RenderUTF8_Shaded(font, message, *forecol);            // UTF8
-        // text = TTF_RenderUNICODE_Shaded(font, unicode_text, *forecol);    // Unicode
+        text = TTF_RenderText_Shaded(font, string, forecol, backcol);      // LATIN1
+        // text = TTF_RenderUTF8_Shaded(font, message, forecol);            // UTF8
+        // text = TTF_RenderUNICODE_Shaded(font, unicode_text, forecol);    // Unicode
         break;
     case TextRenderBlended:
-        text = TTF_RenderText_Blended(font, string, *forecol);                // LATIN1
-        // text = TTF_RenderUTF8_Blended(font, message, *forecol);            // UTF8
-        // text = TTF_RenderUNICODE_Blended(font, unicode_text, *forecol);    // Unicode
+        text = TTF_RenderText_Blended(font, string, forecol);                // LATIN1
+        // text = TTF_RenderUTF8_Blended(font, message, forecol);            // UTF8
+        // text = TTF_RenderUNICODE_Blended(font, unicode_text, forecol);    // Unicode
         break;
     }
 
@@ -145,14 +153,14 @@ int main( int argc, char* args[] )
     }
 
     message = "SECOND MESSAGE!!!";
-    text = TTF_RenderText_Blended(font, message, *forecol);
+    text = TTF_RenderText_Blended(font, message, forecol);
 
 
 
     // SECOND MESSAGE
 
-    scene.messageRect.x = ((SCREEN_WIDTH * SCALE) - text->w)/2;
-    scene.messageRect.y = ((SCREEN_HEIGHT * SCALE) - text->h)/2;
+    scene.messageRect.x = ((display_SCREEN_WIDTH_X * display_SCALE) - text->w)/2;
+    scene.messageRect.y = ((display_SCREEN_HEIGHT_Y * display_SCALE) - text->h)/2;
     scene.messageRect.w = text->w;
     scene.messageRect.h = text->h;
     scene.message = SDL_CreateTextureFromSurface(renderer, text);
