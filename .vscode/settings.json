@@ -1,6 +1,11 @@
 {
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
     "files.associations": {
-        "lib.h": "c"
+        "lib.h": "c",
+        "display.h": "c",
+        "constant.h": "c",
+        "font.h": "c",
+        "sdl.h": "c",
+        "sdl_ttf.h": "c"
     }
 }

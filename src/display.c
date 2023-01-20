@@ -1,51 +1,9 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "display.h"
 #include "constant.h"
 
-bool display_init(struct display* display)
-{
-	//Initialization flag
-	bool success = true;
-
-	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-	{
-		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-		success = false;
-	}
-	else
-	{
-		//Create window
-		display->window = SDL_CreateWindow( "C_SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * SCALE, SCREEN_HEIGHT * SCALE, SDL_WINDOW_SHOWN );
-		if( display->window == NULL )
-		{
-			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
-			success = false;
-		}
-		else
-		{
-			//Create renderer for window
-			display->renderer = SDL_CreateRenderer( display->window, -1, SDL_RENDERER_ACCELERATED );
-			if( display->renderer == NULL )
-			{
-				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
-				success = false;
-			} else {
-				//Create texture
-				display->texture = SDL_CreateTexture(display->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
-				if( display->renderer == NULL )
-				{
-					printf( "Texture could not be created! SDL Error: %s\n", SDL_GetError() );
-					success = false;
-				}
-			}
-		}
-	}
-
-	return success;
-}
-
-bool display_draw(struct display* display, unsigned int frame)
+bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, unsigned int frame, Scene *scene)
 {
 	//Initialization flag
 	bool success = true;
@@ -57,23 +15,35 @@ bool display_draw(struct display* display, unsigned int frame)
 	pixels[frame] = PIXEL_ON_COLOR;
 	pixels[2048-frame] = PIXEL_ON_COLOR;
 
-	// Update the Screen
-	SDL_UpdateTexture(display->texture, NULL, pixels, SCREEN_WIDTH * sizeof(uint32_t));
-	SDL_RenderCopy(display->renderer, display->texture, NULL, NULL);
-	SDL_RenderPresent(display->renderer);
+    /* Clear the background to background color */
+    // SDL_SetRenderDrawColor(renderer, 0x33, 0x00, 0x40, 0xFF);
+    SDL_RenderClear(renderer);
 
-	// SDL_SetWindowTitle(display->window, "CPS:0      FPS:0");
-	
+    // Update game texture
+	SDL_UpdateTexture(texture, NULL, pixels, SCREEN_WIDTH * sizeof(uint32_t));
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+
+    // Update Text Messages
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderCopy(renderer, scene->caption, NULL, &scene->captionRect);
+    SDL_RenderCopy(renderer, scene->message, NULL, &scene->messageRect);
+
+    // Update the Screen
+	SDL_RenderPresent(renderer);
+
 	return success;
 }
 
-void display_close(struct display* display)
+void SDL_close(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture)
 {
-	//Destroy window	
-	SDL_DestroyRenderer( display->renderer );
-	SDL_DestroyWindow( display->window );
-	display->window = NULL;
-	display->renderer = NULL;
+	// Destroy window	
+	SDL_DestroyRenderer( renderer );
+	SDL_DestroyWindow( window );
+	window = NULL;
+	renderer = NULL;
+
+    // Destroy font
+    TTF_Quit();
 
 	//Quit SDL subsystems
 	SDL_Quit();
