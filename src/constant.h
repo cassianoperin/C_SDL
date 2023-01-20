@@ -7,5 +7,3 @@ static const char SCALE           = 10;
 static const int  PIXEL_ON_COLOR   = 0xFFFFFFFF;
 static const int  PIXEL_OFF_COLOR  = 0xFF3ab553;
 uint32_t pixels[SCREEN_WIDTH * SCREEN_HEIGHT];
-// Font
-static const int FONT_SIZE = 12;

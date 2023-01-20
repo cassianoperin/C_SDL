@@ -30,72 +30,26 @@ int main( int argc, char* args[] )
 	// SDL TTF
     TTF_Font *font;
     SDL_Surface *text = NULL;
+
     Scene scene;
-    int ptsize;
-    SDL_Color white = { 0xFF, 0xFF, 0xFF, 1 };
-    SDL_Color black = { 0x00, 0x00, 0x00, 0 };
-    SDL_Color red   = { 0xFF, 0x00, 0x00, 0 };
-    SDL_Color *forecol;
-    SDL_Color *backcol;
-    TextRenderMethod rendermethod;
-    int renderstyle;
-    int outline;
-    int hinting;
-    int kerning;
-    char *message, string[128], *font_path;
 
+	// Colors
+	SDL_Color white = { 0xFF, 0xFF, 0xFF, 1 };
+	// SDL_Color black = { 0x00, 0x00, 0x00, 0 };
+	SDL_Color red   = { 0xFF, 0x00, 0x00, 0 };
+	SDL_Color *forecol;
+	SDL_Color *backcol;
 
-
-	font_init();
-
-    // Render Method
-    // rendermethod = TextRenderSolid;
-    // rendermethod = TextRenderShaded;
-    rendermethod = TextRenderBlended;
-
-    // Render Style
-    renderstyle = TTF_STYLE_NORMAL;
-    // renderstyle |= TTF_STYLE_BOLD;
-    // renderstyle |= TTF_STYLE_ITALIC;
-    // renderstyle |= TTF_STYLE_UNDERLINE;
-    // renderstyle |= TTF_STYLE_STRIKETHROUGH;
-
-    // Render Type
-    // rendertype = RENDER_LATIN1;
-    // rendertype = RENDER_UTF8;
-    // rendertype = RENDER_UNICODE;
-
-    // Outline
-    outline = 0;
-
-    // Hinting
-    // hinting = TTF_HINTING_NORMAL;
-    // hinting = TTF_HINTING_LIGHT;
-    // hinting = TTF_HINTING_MONO;
-    hinting = TTF_HINTING_NONE;
-
-    // Kerning
-    kerning = 1;
-    // kerning = 0;
-
-    // Font Point Size
-    ptsize = FONT_SIZE;
-
-    /* Default is black and white */
+    // ------------ Font Background Color ------------ //
     forecol = &red;
+
+    // ------------ Font Foreground Color ------------ //
     backcol = &white;
 
-    // Font
-    // font_path = "/Users/cassiano/Vscode/C_SDL2/src/Lazy.ttf";
-    font_path = "/Users/cassiano/Vscode/FONT_OK/src/Zack and Sarah.ttf";
 
+	// ---------------------- FONT INIT ----------------------- //
+	font_init();
 
-    /* Initialize the TTF library */
-    if (TTF_Init() < 0) {
-        SDL_Log("Couldn't initialize TTF: %s\n",SDL_GetError());
-        SDL_Quit();
-		exit(2);
-    }
 
     font = TTF_OpenFont(font_path, ptsize);
     if (font == NULL) {
