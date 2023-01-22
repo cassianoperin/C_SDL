@@ -21,3 +21,13 @@ All to /Library/Frameworks
 Link the SDL_Image.h inside SDL2:
 `cd /Library/Frameworks/SDL2.framework/Headers`
 `ln -s /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h`
+
+
+
+### TODO
+1) SDL_INIT AS FUNCTION AGAIN (GLOBAL VARIABLES, main.h?????)
+2) Reduce the usage of GLOBAL variables?
+3) Send Message as argument, and maybe colors
+4) Timer do display the messages
+
+

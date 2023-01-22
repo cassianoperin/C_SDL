@@ -34,10 +34,15 @@ bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* textu
 	SDL_UpdateTexture(texture, NULL, pixels, display_SCREEN_WIDTH_X * sizeof(uint32_t));
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 
-    // Update Text Messages
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
-    SDL_RenderCopy(renderer, scene->caption, NULL, &scene->captionRect);
-    SDL_RenderCopy(renderer, scene->message, NULL, &scene->messageRect);
+    // ----- Update Text Messages ----- //
+	// Message Slot 1
+	if ( string_msg1 != NULL && strcmp( string_msg1, "") != 0 ) {
+		    SDL_RenderCopy(renderer, scene->message1, NULL, &scene->message1_Rect);
+	}
+	// Message Slot 2
+	if ( string_msg2 != NULL && strcmp( string_msg2, "") != 0 ) {
+    	SDL_RenderCopy(renderer, scene->message2, NULL, &scene->message2_Rect);
+	}
 
     // Update the Screen
 	SDL_RenderPresent(renderer);

@@ -1,18 +1,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "main.h"
 #include "lib.h"
 #include "display.h"
 #include "font.h"
-
-// Global Variables
-unsigned int cycle = 0;
-unsigned int frame = 0;
-unsigned int lastTime_second = 0;
-unsigned int lastTime_fps = 0;
-unsigned int currentTime = 0;
-
-
-
 
 int main( int argc, char* args[] )
 {
@@ -22,50 +13,22 @@ int main( int argc, char* args[] )
 	SDL_Renderer* renderer = NULL;
 	SDL_Texture* texture = NULL;
 
-	// Event handler
+	// SDL Event handler
 	SDL_Event event;
+
+	// SDL TTF
+    // TTF_Font *font = NULL;
+    // SDL_Surface *text = NULL;
+
+	// Counters
+	unsigned int cycle = 0;
+	unsigned int frame = 0;
+	unsigned int lastTime_second = 0;
+	unsigned int lastTime_fps = 0;
+	unsigned int currentTime = 0;
 
 	// Main loop flag
 	bool quit = false;
-
-	// SDL TTF
-    TTF_Font *font;
-    SDL_Surface *text = NULL;
-
-    Scene scene;
-
-	// Colors
-	// SDL_Color white = { 0xFF, 0xFF, 0xFF, 1 };
-	// SDL_Color black = { 0x00, 0x00, 0x00, 0 };
-	// SDL_Color red   = { 0xFF, 0x00, 0x00, 0 };
-	// SDL_Color forecol;
-	SDL_Color forecol = { 0x87, 0xCE, 0xFA, 0 }; // red
-	SDL_Color backcol = { 0xFF, 0xFF, 0xFF, 1 }; // white
-	// SDL_Color backcol = { 0x00, 0x00, 0x00, 0 }; // black
-
-    // ------------ Font Background Color ------------ //
-    // forecol = &red;
-
-    // ------------ Font Foreground Color ------------ //
-    // backcol = &white;
-
-
-	// ---------------------- FONT INIT ----------------------- //
-	font_init();
-
-
-    font = TTF_OpenFont(font_path, ptsize);
-    if (font == NULL) {
-        SDL_Log("Couldn't load %d pt font from %s: %s\n",
-                    ptsize, font_path, SDL_GetError());
-        SDL_Quit();
-		exit(2);
-    }
-    TTF_SetFontStyle(font, renderstyle);
-    TTF_SetFontOutline(font, outline);
-    TTF_SetFontKerning(font, kerning);
-    TTF_SetFontHinting(font, hinting);
-
 
 	// ----------------------- SDL INIT ----------------------- //
 
@@ -112,76 +75,10 @@ int main( int argc, char* args[] )
 		}
 	}
 
- 	/* Show which font file we're looking at */
-    SDL_snprintf(string, sizeof(string), "Font file: %s", "FIRST MESSAGE!!!");  /* possible overflow */
-
-
-   switch (rendermethod) {
-    case TextRenderSolid:
-        text = TTF_RenderText_Solid(font, string, forecol);                // LATIN1
-        // text = TTF_RenderUTF8_Solid(font, message, forecol);            // UTF8
-        // text = TTF_RenderUNICODE_Solid(font, unicode_text, forecol);    // Unicode
-        break;
-    case TextRenderShaded:
-        text = TTF_RenderText_Shaded(font, string, forecol, backcol);      // LATIN1
-        // text = TTF_RenderUTF8_Shaded(font, message, forecol);            // UTF8
-        // text = TTF_RenderUNICODE_Shaded(font, unicode_text, forecol);    // Unicode
-        break;
-    case TextRenderBlended:
-        text = TTF_RenderText_Blended(font, string, forecol);                // LATIN1
-        // text = TTF_RenderUTF8_Blended(font, message, forecol);            // UTF8
-        // text = TTF_RenderUNICODE_Blended(font, unicode_text, forecol);    // Unicode
-        break;
-    }
-
-    // DRAW FIXED MESSAGE
-    if (text != NULL) {
-        scene.captionRect.x = 50;
-        scene.captionRect.y = 4;
-        scene.captionRect.w = text->w;
-        scene.captionRect.h = text->h;
-        scene.caption = SDL_CreateTextureFromSurface(renderer, text);
-        SDL_FreeSurface(text);
-    }
-
-
-    if (text == NULL) {
-        SDL_Log("Couldn't render text: %s\n", SDL_GetError());
-        TTF_CloseFont(font);
-		SDL_Quit();
-		exit(2);
-    }
-
-    message = "SECOND MESSAGE!!!";
-    text = TTF_RenderText_Blended(font, message, forecol);
-
-
-
-    // SECOND MESSAGE
-
-    scene.messageRect.x = ((display_SCREEN_WIDTH_X * display_SCALE) - text->w)/2;
-    scene.messageRect.y = ((display_SCREEN_HEIGHT_Y * display_SCALE) - text->h)/2;
-    scene.messageRect.w = text->w;
-    scene.messageRect.h = text->h;
-    scene.message = SDL_CreateTextureFromSurface(renderer, text);
-    // SDL_FreeSurface(text);
-
-
-
-
-
-
-
-    if (text == NULL) {
-        SDL_Log("Couldn't render text: %s\n", SDL_GetError());
-        TTF_CloseFont(font);
-		SDL_Quit();
-		exit(2);
-    }
-
-    // draw_scene(renderer, &scene);
-
-
+	// ---------------------- FONT INIT ----------------------- //
+	
+	
+	font_init(renderer);
 
 
 
@@ -227,12 +124,52 @@ int main( int argc, char* args[] )
 				{
 					quit = true;
 				}
-				else if  (event.type == SDL_MOUSEBUTTONDOWN){
-                scene.messageRect.x = event.button.x - text->w/2;
-                scene.messageRect.y = event.button.y - text->h/2;
-                scene.messageRect.w = text->w;
-                scene.messageRect.h = text->h;
-                // draw_scene(renderer, &scene);
+				else if (event.type == SDL_MOUSEBUTTONDOWN)
+				{
+    
+	
+						// message = "Mouse click detected here!!!";
+						// SDL_Color test = { 0x87, 0xCE, 0xFA, 0 }; // red
+						// text = TTF_RenderText_Blended(font, message, test);
+
+
+
+						// // SECOND MESSAGE
+
+						// scene.message2_Rect.x = ((display_SCREEN_WIDTH_X * display_SCALE) - text->w)/2;
+						// scene.message2_Rect.y = ((display_SCREEN_HEIGHT_Y * display_SCALE) - text->h)/2;
+						// scene.message2_Rect.w = text->w;
+						// scene.message2_Rect.h = text->h;
+						// scene.message2 = SDL_CreateTextureFromSurface(renderer, text);
+						// SDL_FreeSurface(text);
+
+
+						// if (text == NULL) {
+						// 	SDL_Log("Couldn't render text: %s\n", SDL_GetError());
+						// 	TTF_CloseFont(font);
+						// 	SDL_Quit();
+						// 	exit(2);
+						// }
+
+						// scene.message2_Rect.x = 60;
+						// scene.message2_Rect.y = 8;
+						// scene.message2_Rect.w = text->w;
+						// scene.message2_Rect.h = text->h;
+						// printf("%d\n",scene.message2_Rect.x);
+						// printf("%d\n\n",scene.message2_Rect.y);
+
+						// scene.message1_Rect.x = 100;
+						// scene.message1_Rect.y = 4;
+
+						// SDL_Color test = { 0xF00, 0xFF, 0xFF, 0 }; // red
+
+						// message = "NEWWWW  MESSAGE!!!!";
+						// text = TTF_RenderText_Blended(font, message, test);
+
+
+
+						font_update_msg1(renderer);
+						font_update_msg2(renderer);
 				}
 
 			}

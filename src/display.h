@@ -1,17 +1,13 @@
 #pragma once
+#include "typedef.h"
 
-typedef int bool;
-#define true 1
-#define false 0
+// --------------------------------- External Variables --------------------------------- //
+extern char *string_msg1, *string_msg2;
 
-typedef struct {
-    SDL_Texture *caption;
-    SDL_Rect captionRect;
-    SDL_Texture *message;
-    SDL_Rect messageRect;
-} Scene;
+// ---------------------------------- Global Variables ---------------------------------- //
 
-// Display (Screen size)
+// Display
+Scene scene;
 unsigned char display_SCREEN_WIDTH_X;
 unsigned char display_SCREEN_HEIGHT_Y;
 unsigned char display_SCALE;
@@ -21,6 +17,7 @@ unsigned int  display_pixel_OFF_color;
 // Display Array
 unsigned int pixels[2048];
 
+// -------------------------------------- Functions ------------------------------------- //
 void display_init();
 bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, unsigned int frame, Scene *scene);
 void SDL_close(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture);

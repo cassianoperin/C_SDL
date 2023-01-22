@@ -1,38 +1,30 @@
 #pragma once
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "typedef.h"
 
-typedef int bool;
-#define true 1
-#define false 0
+// --------------------------------- External Variables --------------------------------- //
+extern TTF_Font *font;
+extern SDL_Surface *text;
+extern Scene scene;
+extern unsigned char display_SCREEN_WIDTH_X;
+extern unsigned char display_SCREEN_HEIGHT_Y;
+extern unsigned char display_SCALE;
 
-// Text Render Methods
-typedef enum
-{
-    TextRenderSolid,
-    TextRenderShaded,
-    TextRenderBlended
-} TextRenderMethod;
-
-// SDL TTF
-// TTF_Font *font;
-// SDL_Surface *text = NULL;
-// Scene scene;
-int ptsize;
+// ---------------------------------- Global Variables ---------------------------------- //
+SDL_Color font_foreground_color;
+SDL_Color font_background_color;
 TextRenderMethod rendermethod;
+RenderType rendertype;
+int ptsize;
 int renderstyle;
 int outline;
 int hinting;
 int kerning;
-char *message, string[128], *font_path;
+// char *message, string_msg1[128], *font_path;
+char *string_msg1, *string_msg2, *font_path;
 
-// Colors
-// SDL_Color white = { 0xFF, 0xFF, 0xFF, 1 };
-// // SDL_Color black = { 0x00, 0x00, 0x00, 0 };
-// SDL_Color red   = { 0xFF, 0x00, 0x00, 0 };
-// SDL_Color *forecol;
-// SDL_Color *backcol;
-
-
-bool font_init();
+// -------------------------------------- Functions ------------------------------------- //
+bool font_init(SDL_Renderer* renderer);
+void font_update_msg1(SDL_Renderer* renderer);
+void font_update_msg2(SDL_Renderer* renderer);

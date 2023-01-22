@@ -6,6 +6,13 @@
         "constant.h": "c",
         "font.h": "c",
         "sdl.h": "c",
-        "sdl_ttf.h": "c"
+        "sdl_ttf.h": "c",
+        "atomic": "c",
+        "bitset": "c",
+        "main.h": "c",
+        "__locale": "c",
+        "locale": "c",
+        "string": "c",
+        "iosfwd": "c"
     }
 }
