@@ -26,8 +26,8 @@ Link the SDL_Image.h inside SDL2:
 
 ### TODO
 1) SDL_INIT AS FUNCTION AGAIN (GLOBAL VARIABLES, main.h?????)
-2) Reduce the usage of GLOBAL variables?
-3) Send Message as argument, and maybe colors
-4) Timer do display the messages
+2) Reduce the usage of GLOBAL variables
+3) Timer to erase the messages
+4) format thousands (printfcomma(cycle);)
 
 

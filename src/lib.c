@@ -60,3 +60,36 @@ void load_rom(char* filename, unsigned char *mem, unsigned int mem_size)
 	
 	printf("\n\n");
 }
+
+
+void printfcomma ( long long unsigned int n) 
+{
+
+    char nstring[100];
+     int m;
+      int ptr;
+       int i,j;
+
+
+    sprintf(nstring,"%llu",n);
+      m=strlen(nstring);
+
+     ptr=m%3;
+       if (ptr)
+        {   for (i=0;i<ptr;i++)       // print first digits before comma
+              printf("%c", nstring[i]); 
+           printf(".");
+         }
+     j=0; 
+     for (i=ptr;i<m;i++)      // print the rest inserting commas
+          {
+            printf("%c",nstring[i]);
+            j++;
+            if (j%3==0)
+              if(i<(m-1)) printf(".");
+           }
+
+	printf("\n");
+
+}
+

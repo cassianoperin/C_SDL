@@ -1,9 +1,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <stdio.h>
 #include "main.h"
 #include "lib.h"
 #include "display.h"
 #include "font.h"
+
+// --------------------------------- External Variables --------------------------------- //
+extern char *string_msg1, *string_msg2;
 
 int main( int argc, char* args[] )
 {
@@ -98,6 +102,19 @@ int main( int argc, char* args[] )
 			sprintf(title_msg, "Cycles per second: %d\t\tFPS: %d", cycle, frame+1);
 			SDL_SetWindowTitle(window, title_msg);
 
+			// Handle Screen Messages
+			// string_msg1 = atoa(1234567890);
+			// string_msg1 = "UHULLLL";
+			char* charint_str[20];
+			string_msg1 = charint_str;
+			sprintf(string_msg1, "%d", cycle );
+			font_update_msg1(renderer);
+
+			printfcomma(cycle);
+			
+			string_msg2 = "UHULLLL 22222";
+			font_update_msg2(renderer);
+
 			// Update timer variables
 			lastTime_second = currentTime;
 
@@ -123,53 +140,6 @@ int main( int argc, char* args[] )
 				else if (event.type == SDL_QUIT)
 				{
 					quit = true;
-				}
-				else if (event.type == SDL_MOUSEBUTTONDOWN)
-				{
-    
-	
-						// message = "Mouse click detected here!!!";
-						// SDL_Color test = { 0x87, 0xCE, 0xFA, 0 }; // red
-						// text = TTF_RenderText_Blended(font, message, test);
-
-
-
-						// // SECOND MESSAGE
-
-						// scene.message2_Rect.x = ((display_SCREEN_WIDTH_X * display_SCALE) - text->w)/2;
-						// scene.message2_Rect.y = ((display_SCREEN_HEIGHT_Y * display_SCALE) - text->h)/2;
-						// scene.message2_Rect.w = text->w;
-						// scene.message2_Rect.h = text->h;
-						// scene.message2 = SDL_CreateTextureFromSurface(renderer, text);
-						// SDL_FreeSurface(text);
-
-
-						// if (text == NULL) {
-						// 	SDL_Log("Couldn't render text: %s\n", SDL_GetError());
-						// 	TTF_CloseFont(font);
-						// 	SDL_Quit();
-						// 	exit(2);
-						// }
-
-						// scene.message2_Rect.x = 60;
-						// scene.message2_Rect.y = 8;
-						// scene.message2_Rect.w = text->w;
-						// scene.message2_Rect.h = text->h;
-						// printf("%d\n",scene.message2_Rect.x);
-						// printf("%d\n\n",scene.message2_Rect.y);
-
-						// scene.message1_Rect.x = 100;
-						// scene.message1_Rect.y = 4;
-
-						// SDL_Color test = { 0xF00, 0xFF, 0xFF, 0 }; // red
-
-						// message = "NEWWWW  MESSAGE!!!!";
-						// text = TTF_RenderText_Blended(font, message, test);
-
-
-
-						font_update_msg1(renderer);
-						font_update_msg2(renderer);
 				}
 
 			}

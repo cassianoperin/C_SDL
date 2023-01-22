@@ -11,3 +11,5 @@ bool ticker_fps(unsigned int lastTime, unsigned int currentTime);
 
 // Load rom into memory
 void load_rom(char* filename, unsigned char *mem, unsigned int mem_size);
+
+void printfcomma ( long long unsigned int n);
