@@ -2,9 +2,9 @@
 
 Basic implementation of SDL, SDL_TTF anc C for emulators
 
-**Window with game running and messages over the screen** |
+**Window with game running (white squares) and messages being showed over the screen** |
 :-------------------------:|
-<img width="430" alt="C_SDL_TTF" src="https://github.com/cassianoperin/C_SDL/blob/main/src/Images/C_SDL_TTF.png">  |
+<img alt="C_SDL_TTF" src="https://github.com/cassianoperin/C_SDL/blob/main/src/Images/C_SDL_TTF.png">  |
 
 ## Docs
 
