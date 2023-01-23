@@ -24,5 +24,5 @@ unsigned int pixels[2048];
 
 // -------------------------------------- Functions ------------------------------------- //
 void display_init();
-bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, unsigned int frame, Scene *scene);
-void SDL_close(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture);
+bool display_draw(unsigned int frame, Scene *scene);
+void SDL_close();

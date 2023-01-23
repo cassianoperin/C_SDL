@@ -52,7 +52,7 @@ void display_init()
 	}
 };
 
-bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, unsigned int frame, Scene *scene)
+bool display_draw(unsigned int frame, Scene *scene)
 {
 	//Initialization flag
 	bool success = true;
@@ -90,7 +90,7 @@ bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* textu
 	return success;
 }
 
-void SDL_close(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture)
+void SDL_close()
 {
 	// Destroy window	
 	SDL_DestroyRenderer( renderer );

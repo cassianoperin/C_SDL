@@ -81,7 +81,7 @@ int main( int argc, char* args[] )
 			}
 
 			// Draw screen (game and text messages)
-			display_draw(window, renderer, texture, frame, &scene);
+			display_draw(frame, &scene);
 
 			// Update timer variables
 			lastTime_fps = currentTime;
@@ -95,7 +95,7 @@ int main( int argc, char* args[] )
 	}
 
 	//Free resources and close SDL
-	SDL_close(window, renderer, texture);
+	SDL_close();
 
 	return 0;
 }
