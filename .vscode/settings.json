@@ -13,6 +13,25 @@
         "__locale": "c",
         "locale": "c",
         "string": "c",
-        "iosfwd": "c"
+        "iosfwd": "c",
+        "__bit_reference": "c",
+        "__node_handle": "c",
+        "chrono": "c",
+        "cstddef": "c",
+        "__memory": "c",
+        "limits": "c",
+        "optional": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "vector": "c",
+        "sstream": "c",
+        "__hash_table": "c",
+        "__split_buffer": "c",
+        "array": "c",
+        "initializer_list": "c",
+        "string_view": "c",
+        "unordered_map": "c"
     }
 }

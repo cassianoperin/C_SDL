@@ -21,7 +21,6 @@ int renderstyle;
 int outline;
 int hinting;
 int kerning;
-// char *message, string_msg1[128], *font_path;
 char *string_msg1, *string_msg2, *font_path;
 
 // -------------------------------------- Functions ------------------------------------- //

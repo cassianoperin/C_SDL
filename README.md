@@ -1,9 +1,8 @@
 # C SDL2
 
-Basic implementation of SDL anc C for emulators
+Basic implementation of SDL, SDL_TTF anc C for emulators
 
-
-# Docs
+## Docs
 
 ### SDL2-Starter
 
@@ -11,23 +10,22 @@ https://github.com/codingwithjulio/sdl2-starter
 
 ### MACOS SDL2 / SDL2_Image instructions
 
-Install SDL2 Framework:
+- Install SDL2 Framework:
 
-Install SDL2_Image (dmg) from:
+https://www.libsdl.org/
+
+- Install SDL2_Image (dmg) from:
+
 http://www.libsdl.org/projects/SDL_image/
+
+- Install SDL_TTF:
+
+https://www.libsdl.org/projects/SDL_ttf/release/
+
 
 All to /Library/Frameworks
 
 Link the SDL_Image.h inside SDL2:
 `cd /Library/Frameworks/SDL2.framework/Headers`
 `ln -s /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h`
-
-
-
-### TODO
-1) SDL_INIT AS FUNCTION AGAIN (GLOBAL VARIABLES, main.h?????)
-2) Reduce the usage of GLOBAL variables
-3) Timer to erase the messages
-4) format thousands (printfcomma(cycle);)
-
 

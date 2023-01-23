@@ -6,7 +6,10 @@ bool font_init(SDL_Renderer* renderer){
 
     // Font Path
     // font_path = "/Users/cassiano/Vscode/C_SDL/src/Fonts/Lazy.ttf";
-    font_path = "/Users/cassiano/Vscode/C_SDL/src/Fonts/Zack and Sarah.ttf";
+    // font_path = "/Users/cassiano/Vscode/C_SDL/src/Fonts/Zack and Sarah.ttf";
+    // font_path = "/Users/cassiano/Vscode/C_SDL/src/Fonts/39335_UniversCondensed.ttf";
+    font_path = "/Users/cassiano/Vscode/C_SDL/src/Fonts/16020_FUTURAM.ttf";
+    // font_path = "/Users/cassiano/Vscode/C_SDL/src/Fonts/07558_CenturyGothic.ttf";
 
     // Colors
     // font_foreground_color = { 0x87, 0xCE, 0xFA, 0 }; // Blue

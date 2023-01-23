@@ -10,6 +10,46 @@ void display_init()
 	display_SCALE			= 20;
 	display_pixel_ON_color	= 0xFFFFFFFF;
 	display_pixel_OFF_color	= 0xFF000000;
+
+	// SDL INIT
+	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	{
+		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+        SDL_Quit();
+		exit(2);
+	}
+	else
+	{
+		//Create window
+		window = SDL_CreateWindow( "C_SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, display_SCREEN_WIDTH_X * display_SCALE, display_SCREEN_HEIGHT_Y * display_SCALE, SDL_WINDOW_SHOWN );
+		
+		if( window == NULL )
+		{
+			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
+			SDL_Quit();
+			exit(2);
+		}
+		else
+		{
+			//Create renderer for window
+			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+			if( renderer == NULL )
+			{
+				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+				SDL_Quit();
+				exit(2);
+			} else {
+				//Create texture
+				texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, display_SCREEN_WIDTH_X, display_SCREEN_HEIGHT_Y);
+				if( renderer == NULL )
+				{
+					printf( "Texture could not be created! SDL Error: %s\n", SDL_GetError() );
+					SDL_Quit();
+					exit(2);
+				}
+			}
+		}
+	}
 };
 
 bool display_draw(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, unsigned int frame, Scene *scene)

@@ -2,7 +2,12 @@
 #include "typedef.h"
 
 // --------------------------------- External Variables --------------------------------- //
+// SDL Font
 extern char *string_msg1, *string_msg2;
+// SDL Video
+extern SDL_Window* window;
+extern SDL_Renderer* renderer;
+extern SDL_Texture* texture;
 
 // ---------------------------------- Global Variables ---------------------------------- //
 
