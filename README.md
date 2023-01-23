@@ -26,6 +26,7 @@ https://www.libsdl.org/projects/SDL_ttf/release/
 All to /Library/Frameworks
 
 Link the SDL_Image.h inside SDL2:
-`cd /Library/Frameworks/SDL2.framework/Headers`
-`ln -s /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h`
 
+`cd /Library/Frameworks/SDL2.framework/Headers`
+
+`ln -s /Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h`
